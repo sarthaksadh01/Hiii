@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "545628753730",
+    "firebase_url": "https://hiii-15fdf.firebaseio.com",
+    "project_id": "hiii-15fdf",
+    "storage_bucket": "hiii-15fdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545628753730:android:8714002c0b0138ce",
+        "android_client_info": {
+          "package_name": "com.cool.sarthak.hiii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545628753730-0l3e16dqos2hdqneoodvmusbh14rrbg8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cool.sarthak.hiii",
+            "certificate_hash": "22940643e9554762d378dafeb98b0e3a77c98032"
+          }
+        },
+        {
+          "client_id": "545628753730-0o2upqfs1l2lr4cgfut5h0bdbrmbv520.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByqYF_9iQvN_3Bxl00O4RqoQl16KIXw0c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545628753730-0o2upqfs1l2lr4cgfut5h0bdbrmbv520.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

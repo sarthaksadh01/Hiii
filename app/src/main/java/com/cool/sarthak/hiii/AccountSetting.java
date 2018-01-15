@@ -1,0 +1,207 @@
+package com.cool.sarthak.hiii;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.net.URI;
+import java.util.Random;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class AccountSetting extends AppCompatActivity {
+    private DatabaseReference databaseReference;
+    private FirebaseUser mCurrentUser;
+    private TextView mname,mstatus;
+    private Button mstatuschange,mdpchange;
+    private final static int req=1;
+    private StorageReference mStorageRef;
+    String uid;
+    CircleImageView circleImageView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_account_setting);
+        mstatuschange=findViewById(R.id.actsettingstatuschange);
+        mstatus=findViewById(R.id.actsettingstatus);
+        mname =findViewById(R.id.actsettingname);
+        mdpchange=findViewById(R.id.actsettingdpchange);
+        circleImageView=findViewById(R.id.actsettingdp);
+
+        //cloud storage
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+
+//setting previous dp
+        Picasso.with(getApplicationContext()).setLoggingEnabled(true);
+
+
+
+
+        // fire basea
+
+        mCurrentUser= FirebaseAuth.getInstance().getCurrentUser();
+         uid = mCurrentUser.getUid();
+
+         // cloud storage
+
+        mStorageRef.child("profile_images/"+uid+".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Picasso.with(getApplicationContext()).load(uri).placeholder(R.drawable.blankprofile).into(circleImageView);
+                Log.d("lol", "onCreate: "+ uri);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(getApplicationContext(),""+exception,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+// user info
+
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("User").child(uid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("name").getValue().toString();
+                String status = dataSnapshot.child("status").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+
+                mname.setText(name);
+
+                mstatus.setText(status);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mstatuschange.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String StatusValue = mstatus.getText().toString();
+                        Intent intent =new Intent(AccountSetting.this,ChangeStatus.class);
+                        //intent.putExtra("previous_status",mstatus.getText().toString());
+                        intent.putExtra("previous_status",StatusValue);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        mdpchange.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//
+
+                        CropImage.activity()
+                                .setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1)
+                                .start(AccountSetting.this);
+                    }
+                }
+        );
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( resultCode==req&&requestCode==RESULT_OK) {
+         Uri imageUri = data.getData();
+
+    }
+
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if (resultCode == RESULT_OK) {
+                    final ProgressDialog mprogress;
+                    mprogress = new ProgressDialog(this);
+                    mprogress.setTitle("Changing Profile Picture");
+                    mprogress.setCanceledOnTouchOutside(false);
+                    mprogress.show();
+                    Uri resultUri = result.getUri();
+
+                    StorageReference filepath =mStorageRef.child("profile_images").child(uid+".jpeg");
+                    filepath.putFile(resultUri).addOnCompleteListener(
+                            new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    if(task.isSuccessful())
+                                    {
+
+                                        //DO nothing
+                                        mStorageRef.child("profile_images/"+uid+".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                // Got the download URL for 'users/me/profile.png'
+                                                Picasso.with(getApplicationContext()).load(uri).into(circleImageView);
+                                                Log.d("lol", "onCreate: "+ uri);
+                                                String imagelocation=uri.toString();
+
+                                                databaseReference.child("image").setValue(imagelocation);
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception exception) {
+                                                // Handle any errors
+                                                Toast.makeText(getApplicationContext(),""+exception,Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        mprogress.hide();
+
+                                    }
+
+                                    }
+
+                                }
+
+
+
+                    );
+
+
+
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    Exception error = result.getError();
+                }
+            }
+        }
+
+
+}

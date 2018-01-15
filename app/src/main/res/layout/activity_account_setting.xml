@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.AccountSetting"
+    android:background="@color/colorPrimaryDark">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/actsettingdp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="104dp"
+        android:layout_marginTop="41dp"
+        android:src="@drawable/blankprofile" />
+
+    <TextView
+        android:id="@+id/actsettingname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actsettingdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:gravity="center"
+        android:text="Your Name"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/actsettingstatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actsettingname"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/hello"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <Button
+        android:textColor="#ffffff"
+        android:backgroundTint="@color/colorAccent"
+        android:id="@+id/actsettingdpchange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actsettingstatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:text="@string/change_profile" />
+
+    <Button
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="#ffffff"
+        android:id="@+id/actsettingstatuschange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/actsettingdpchange"
+        android:layout_below="@+id/actsettingdpchange"
+        android:layout_marginTop="20dp"
+        android:text="@string/change_status" />
+
+
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.StartActivity"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:textColor="#ffffff"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="178dp"
+        android:text="Welcome to Hello!" />
+
+    <Button
+        android:textColor="#ffffff"
+        android:backgroundTint="@color/colorAccent"
+        android:id="@+id/startregbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:text="@string/need_a_new_account" />
+
+    <Button
+        android:id="@+id/startlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startregbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/already_registered"
+        android:textColor="#ffffff" />
+</RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.LoginActivity">
+    <include layout="@layout/app_bar"
+        android:id="@+id/loginpagetoolbar"
+        />
+
+    <EditText
+        android:hint="Email Id"
+        android:id="@+id/loginemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:hint="Password"
+        android:id="@+id/loginpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/loginemail"
+        android:layout_below="@+id/loginemail"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+
+    <Button
+android:textColor="#ffffff"
+        android:id="@+id/loginLoginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/loginpassword"
+        android:layout_marginEnd="27dp"
+        android:layout_marginTop="86dp"
+        android:text="login"
+        android:backgroundTint="@color/colorPrimary"/>
+</RelativeLayout>
+
