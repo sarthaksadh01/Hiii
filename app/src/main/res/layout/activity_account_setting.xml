@@ -42,10 +42,10 @@
         android:textSize="15sp" />
 
     <Button
-        android:textColor="#ffffff"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:backgroundTint="#ffffff"
         android:id="@+id/actsettingdpchange"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actsettingstatus"
         android:layout_centerHorizontal="true"
@@ -53,10 +53,10 @@
         android:text="@string/change_profile" />
 
     <Button
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="#ffffff"
+        android:backgroundTint="#ffffff"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/actsettingstatuschange"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/actsettingdpchange"
         android:layout_below="@+id/actsettingdpchange"

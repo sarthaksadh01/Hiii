@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
     <item
         android:id="@+id/actsettingbutton"
-        android:title="Account Settings" />
+        android:title="Profile Settings" />
     <item
         android:id="@+id/alluserbutton"
-        android:title="All Users" />
+        android:title="Search" />
     <item
         android:id="@+id/logoutbutton"
         android:title="@string/log_out" />
+    <item
+        android:id="@+id/VS"
+        android:title="Meet Jarvis!"/>
+
+
+
 </menu>

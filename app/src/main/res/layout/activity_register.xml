@@ -45,6 +45,7 @@
         android:inputType="textPassword" />
 
     <Button
+
         android:textColor="#ffffff"
         android:backgroundTint="@color/colorPrimary"
         android:id="@+id/regcreateaccount"
@@ -55,4 +56,15 @@
         android:layout_marginEnd="11dp"
         android:layout_marginTop="34dp"
         android:text="@string/create_account" />
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9606581824559784/4126039354">
+    </com.google.android.gms.ads.AdView>
+
 </RelativeLayout>

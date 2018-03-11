@@ -2,6 +2,7 @@ package com.cool.sarthak.hiii;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,10 +31,14 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class AccountSetting extends AppCompatActivity {
     private DatabaseReference databaseReference;
@@ -42,8 +47,13 @@ public class AccountSetting extends AppCompatActivity {
     private Button mstatuschange,mdpchange;
     private final static int req=1;
     private StorageReference mStorageRef;
-    String uid;
-    CircleImageView circleImageView;
+    private String uid;
+    private TextView notice;
+    private CircleImageView circleImageView;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +65,12 @@ public class AccountSetting extends AppCompatActivity {
         mdpchange=findViewById(R.id.actsettingdpchange);
         circleImageView=findViewById(R.id.actsettingdp);
 
+
         //cloud storage
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
-//setting previous dp
+          //setting previous dp
         Picasso.with(getApplicationContext()).setLoggingEnabled(true);
 
 
@@ -77,7 +88,7 @@ public class AccountSetting extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Picasso.with(getApplicationContext()).load(uri).placeholder(R.drawable.blankprofile).into(circleImageView);
-                Log.d("lol", "onCreate: "+ uri);
+               // Log.d("lol", "onCreate: "+ uri);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -92,6 +103,7 @@ public class AccountSetting extends AppCompatActivity {
 
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("User").child(uid);
+        databaseReference.child("online").setValue("true");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -156,7 +168,28 @@ public class AccountSetting extends AppCompatActivity {
                     mprogress.show();
                     Uri resultUri = result.getUri();
 
+//--------------------------creating thumbnail----------------------------------------------------------------------
+
+
+                    final File thumb_filePath = new File(resultUri.getPath());
+                    Bitmap thumb_bitmap = null;
+                    try {
+                        thumb_bitmap = new Compressor(this)
+                                .setMaxWidth(200)
+                                .setMaxHeight(200)
+                                .setQuality(75)
+                                .compressToBitmap(thumb_filePath);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    final byte[] thumb_byte = baos.toByteArray();
+
+
                     StorageReference filepath =mStorageRef.child("profile_images").child(uid+".jpeg");
+                    final StorageReference thumb_filepath = mStorageRef.child("profile_images").child("thumbs").child(uid + ".jpg");
                     filepath.putFile(resultUri).addOnCompleteListener(
                             new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -164,16 +197,69 @@ public class AccountSetting extends AppCompatActivity {
                                     if(task.isSuccessful())
                                     {
 
+
                                         //DO nothing
                                         mStorageRef.child("profile_images/"+uid+".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri) {
+
+
                                                 // Got the download URL for 'users/me/profile.png'
                                                 Picasso.with(getApplicationContext()).load(uri).into(circleImageView);
                                                 Log.d("lol", "onCreate: "+ uri);
                                                 String imagelocation=uri.toString();
+                                                databaseReference.child("image").setValue(imagelocation).addOnCompleteListener(
+                                                        new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful())
+                                                                {
+//
 
-                                                databaseReference.child("image").setValue(imagelocation);
+
+                                                                    UploadTask uploadTask = (UploadTask) thumb_filepath.putBytes(thumb_byte).addOnCompleteListener(
+                                                                            new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                                                                    if(task.isSuccessful())
+                                                                                    {
+                                                                                      thumb_filepath.getDownloadUrl().addOnSuccessListener(
+                                                                                              new OnSuccessListener<Uri>() {
+                                                                                                  @Override
+                                                                                                  public void onSuccess(Uri uri) {
+                                                                                                      String thumbLocation=uri.toString();
+                                                                                                      databaseReference.child("thumbnail_image").setValue(thumbLocation).addOnCompleteListener(
+                                                                                                              new OnCompleteListener<Void>() {
+                                                                                                                  @Override
+                                                                                                                  public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                      if(task.isSuccessful())
+                                                                                                                      {
+                                                                                                                          mprogress.hide();
+                                                                                                                      }
+                                                                                                                      else {
+                                                                                                                          mprogress.hide();
+                                                                                                                          Toast.makeText(AccountSetting.this, "try again", Toast.LENGTH_SHORT).show();
+                                                                                                                      }
+                                                                                                                  }
+                                                                                                              }
+                                                                                                      );
+                                                                                                  }
+                                                                                              }
+                                                                                      );
+                                                                                        //databaseReference.child("thumbnail_image").setValue(thumbLocation);
+                                                                                    }
+
+                                                                                }
+                                                                            }
+                                                                    );
+
+
+                                                                }
+                                                            }
+                                                        }
+                                                );
+
+
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -183,7 +269,7 @@ public class AccountSetting extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(),""+exception,Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                                        mprogress.hide();
+
 
                                     }
 
@@ -202,6 +288,11 @@ public class AccountSetting extends AppCompatActivity {
                 }
             }
         }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        databaseReference.child("online").setValue("false");
+    }
 
 
 }

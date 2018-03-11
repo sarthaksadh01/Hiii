@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.UsersActivity">
+    <include layout="@layout/app_bar" android:id="@+id/users_appBar" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search"
+        android:layout_below="@+id/users_appBar"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/find"
+        android:hint="search by name"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/search"
+        android:text="User Names are Case Sensitive"
+        android:textSize="30sp"
+        android:id="@+id/useractivitynotice"/>
+    <Button
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="search"
+        android:textColor="#cccccc"
+        android:id="@+id/find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/users_appBar"
+        android:onClick="find"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:visibility="invisible"
+        android:id="@+id/users_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/search"></android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

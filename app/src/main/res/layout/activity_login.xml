@@ -5,44 +5,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cool.sarthak.hiii.LoginActivity">
+    tools:context="com.cool.sarthak.hiii.LoginActivity"
+    >
     <include layout="@layout/app_bar"
         android:id="@+id/loginpagetoolbar"
         />
 
     <EditText
-        android:hint="Email Id"
+
+
         android:id="@+id/loginemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="97dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/loginpagetoolbar"
+        android:layout_marginTop="45dp"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:hint="Email Id"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
 
     <EditText
-        android:hint="Password"
+
         android:id="@+id/loginpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/loginemail"
+
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/loginemail"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
 
     <Button
-android:textColor="#ffffff"
         android:id="@+id/loginLoginbutton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/button3"
         android:layout_below="@+id/loginpassword"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="54dp"
+
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="10dp"
         android:text="login"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginLoginbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="forgotPassword"
+        android:padding="10dp"
+        android:text="need help?"
+        android:textColor="#ffffff" />
 </RelativeLayout>
 

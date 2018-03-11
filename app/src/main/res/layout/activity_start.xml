@@ -6,38 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cool.sarthak.hiii.StartActivity"
-    android:background="@color/colorPrimary">
-
+    android:background="@color/colorPrimary"
+   >
     <TextView
-        android:textColor="#ffffff"
-        android:id="@+id/textView"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Ahoy!"
+        android:layout_below="@+id/logo"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="178dp"
-        android:text="Welcome to Hello!" />
-
+        android:src="@drawable/logo" />
     <Button
-        android:textColor="#ffffff"
-        android:backgroundTint="@color/colorAccent"
         android:id="@+id/startregbutton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+
+        android:layout_above="@+id/startlogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp"
-        android:text="@string/need_a_new_account" />
+        android:layout_marginBottom="14dp"
+
+        android:backgroundTint="#ffffff"
+        android:padding="5dp"
+        android:text="@string/need_a_new_account"
+        android:textColor="@color/colorPrimary" />
 
     <Button
         android:id="@+id/startlogin"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startregbutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:backgroundTint="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+
+        android:layout_alignStart="@+id/startregbutton"
+        android:layout_marginBottom="76dp"
+        android:backgroundTint="#ffffff"
         android:text="@string/already_registered"
-        android:textColor="#ffffff" />
+        android:textColor="@color/colorPrimary" />
+
+
+
+
 </RelativeLayout>

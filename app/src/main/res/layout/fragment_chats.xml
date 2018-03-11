@@ -5,9 +5,9 @@
     tools:context="com.cool.sarthak.hiii.ChatsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="chats" />
+  <android.support.v7.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/conv_list"></android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

@@ -51,14 +51,21 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String l_email=lEmail.getText().toString();
                         String l_password=lPassword.getText().toString();
-                        loginuser(l_email,l_password);
+                        if(l_email.equals("")||l_password.equals(""))
+                        {
+                            Toast.makeText(LoginActivity.this,"all fields are must",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            loginuser(l_email, l_password);
 
-                        //progress initialising
+                            //progress initialising
 
-                        loginprogress.setTitle("loging user..");
-                        loginprogress.setMessage("Please Wait While We Verify Your Data .");
-                        loginprogress.setCanceledOnTouchOutside(false);
-                        loginprogress.show();
+
+                            loginprogress.setTitle("loging user..");
+                            loginprogress.setMessage("Please Wait While We Verify Your Data .");
+                            loginprogress.setCanceledOnTouchOutside(false);
+                            loginprogress.show();
+                        }
                         
                     }
                 }
@@ -91,4 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+     public void forgotPassword(View view)
+     {
+         Intent intent = new Intent(this,ForgetPassword.class);
+         startActivity(intent);
+     }
 }

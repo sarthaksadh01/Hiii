@@ -9,6 +9,8 @@ public class Users {
     String image;
     String status;
 
+    String thumbnail_image;
+
     public Users(String thumbnail_image) {
         this.thumbnail_image = thumbnail_image;
     }
@@ -23,7 +25,6 @@ public class Users {
         return thumbnail_image;
     }
 
-    String thumbnail_image;
 
     public Users()
     {

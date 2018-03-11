@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
+    private AdView mAdView;
     private EditText mName,mEmail,mPassword;
     Button mRegister;
     String m_Name,m_Email,m_Password;
@@ -52,9 +55,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         //progress bar
 
+
         mprogress= new ProgressDialog(this);
 
         //firebase
+
+        // ad-----------------------------------admob---------------------------------------
+
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -65,14 +77,25 @@ public class RegisterActivity extends AppCompatActivity {
                         m_Name=mName.getText().toString();
                         m_Email=mEmail.getText().toString();
                         m_Password=mPassword.getText().toString();
-                        register_user(m_Name,m_Email,m_Password);
 
-                        //progress initialising
+                        if(m_Name.equals("")||m_Email.equals("")||m_Password.equals(""))
+                        {
+                            Toast.makeText(RegisterActivity.this,"all fields are must",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(m_Password.length()<8)
+                        {
+                            Toast.makeText(RegisterActivity.this,"password should be atleast 8 charachters long",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            register_user(m_Name, m_Email, m_Password);
 
-                        mprogress.setTitle("registering user..");
-                        mprogress.setMessage("Please Wait While We Create Your Account.");
-                        mprogress.setCanceledOnTouchOutside(false);
-                        mprogress.show();
+                            //progress initialising
+
+                            mprogress.setTitle("registering user..");
+                            mprogress.setMessage("Please Wait While We Create Your Account.");
+                            mprogress.setCanceledOnTouchOutside(false);
+                            mprogress.show();
+                        }
 
 
 

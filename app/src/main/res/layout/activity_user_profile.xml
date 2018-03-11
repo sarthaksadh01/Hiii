@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.UserProfile">
+
+ <ImageView
+     android:transitionName="userimage"
+     android:layout_width="match_parent"
+     android:layout_height="340dp"
+     android:src="@drawable/blankprofile"
+     android:id="@+id/userprofiledp"/>
+    <TextView
+        android:transitionName="username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userprofilename"
+        android:text="NAME"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:layout_below="@id/userprofiledp"
+        android:textStyle="bold"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userprofilestatus"
+        android:text="status"
+        android:layout_below="@id/userprofilename"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="italic"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#ffffff"
+        android:text="send friend request"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/userprofilesnedrequest"/>
+
+</RelativeLayout>

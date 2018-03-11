@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cool.sarthak.hiii.ChatActivity">
+    <include layout="@layout/app_bar"
+        android:id="@+id/chatactivitypagetoolbar"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:background="#cccccc"
+        android:layout_below="@+id/chatactivitypagetoolbar"
+        android:id="@+id/chatlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chatactivitymsg"
+
+       ></android.support.v7.widget.RecyclerView>
+    <ImageView
+        android:id="@+id/chatactivitysend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/sendicon"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="sendImage"
+        android:src="@drawable/addpic"
+        android:id="@+id/chatactivityaddpic"/>
+
+    <EditText
+        android:id="@+id/chatactivitymsg"
+        android:hint="type msg"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/chatactivityaddpic"
+        android:layout_toStartOf="@+id/chatactivitysend"/>
+
+</RelativeLayout>
